@@ -9,13 +9,20 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  dialogFlow.executeTextQuery('hello', function(response) {
-      console.log('response: ' + JSON.stringify(response));
-  })
+  greeting(socket);
+
   socket.on('startRecording', function (data) {
     io.emit('newProducts', products)
   });
 });
+
+function greeting(socket) {
+    dialogFlow.executeTextQuery('hello', function(response) {
+        setTimeout(function(){
+            socket.emit('georgeTalking');
+        }, 5000)
+    })
+}
 
 http.listen(4000, function(){
   console.log('listening on *:4000');
