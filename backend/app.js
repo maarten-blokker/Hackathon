@@ -12,6 +12,10 @@ io.on('connection', function(socket){
   socket.on('startRecording', function (data) {
     io.emit('newProducts', products)
   });
+
+  socket.on('blob', function (data) {
+    console.log(data)
+  })
 });
 
 http.listen(4000, function(){
