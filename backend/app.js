@@ -9,10 +9,11 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  greeting(socket);
-
   socket.on('startRecording', function (data) {
-    io.emit('newProducts', products)
+    
+    greeting(socket);
+
+    // io.emit('newProducts', products)
   });
 
   socket.on('blob', function (data) {
@@ -21,10 +22,12 @@ io.on('connection', function(socket){
 });
 
 function greeting(socket) {
+    socket.emit('georgeTalking')
+
     dialogFlow.executeQuery(dialogFlow.createTextQuery('hello'), function(response) {
         setTimeout(function(){
-            socket.emit('georgeTalking');
-        }, 5000)
+            socket.emit('userTalking');
+        }, 3000)
     })
 }
 

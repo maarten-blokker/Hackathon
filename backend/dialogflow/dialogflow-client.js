@@ -68,8 +68,6 @@ function executeQuery(query, fn) {
     sessionClient
         .detectIntent(query)
         .then(responses => {
-            const response = handleResponse(responses);
-
             fn(handleResponse(responses));
         })
         .catch(err => {
