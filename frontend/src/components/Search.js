@@ -13,7 +13,7 @@ class Search extends PureComponent {
               <button className="button search" type="submit" aria-label="submit">
                 <img src={ SearchIcon } alt="search icon" className="searchIcon" />
               </button>
-              <button className="button mic" type="reset" aria-label="clear search">
+              <button className="button mic" type="reset" aria-label="clear search" onClick={ this.props.onClick }>
                 <img src={ MicIcon } alt="mic icon" className="micIcon" />
               </button>
           </form>

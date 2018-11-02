@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Search from './components/Search';
-import Carousel from './components/Carousel'
+import VoiceSearch from './Containers/VoiceSearch'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Search />        
-        <Carousel />
+        <VoiceSearch />
       </div>
     );
   }
