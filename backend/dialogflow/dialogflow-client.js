@@ -56,7 +56,7 @@ function createBlobQuery(blob) {
         queryInput: {
           audioConfig: {
             audioEncoding: 'mp3',
-            sampleRateHertz: 48000,
+            sampleRateHertz: 44100,
             languageCode: languageCode,
           },
         },
