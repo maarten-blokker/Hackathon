@@ -2,16 +2,22 @@ import React, { PureComponent } from 'react'
 import Search from '../components/Search';
 import Carousel from '../components/Carousel'
 import openSocket from 'socket.io-client';
+import George from '../components/George';
 
 const socket = openSocket('http://localhost:4000');
 
 class VoiceSearch extends PureComponent {
     state = {
         products: null,
+        loadGeorge: false,
     }
+
     componentDidMount() {
-      socket.on('newProducts', (data) => this.setState({ products: data.products }))
+      socket.on('newProducts', (data) => this.setState({ products: data.products, loadGeorge: false }))
+      socket.on('georgeTalking', () => this.setState({ loadGeorge: true }))
+      socket.on('userTalking', () => this.setState({ loadGeorge: false }))
     }
+
     emitStart() {
       socket.emit('startRecording', { userName: 'Chen' })
     }
@@ -21,6 +27,7 @@ class VoiceSearch extends PureComponent {
           <React.Fragment>
             <Search onClick={ this.emitStart }/>
             { this.state.products && <Carousel />}
+            <George />
           </React.Fragment>
         )
     }
