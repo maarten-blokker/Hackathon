@@ -66,7 +66,7 @@ function createBlobQuery(blob) {
 
 function executeQuery(query, fn) {
     sessionClient
-        .detectIntent(createTextRequest(query))
+        .detectIntent(query)
         .then(responses => {
             const response = handleResponse(responses);
 
