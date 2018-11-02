@@ -56,7 +56,7 @@ function createBlobQuery(blob) {
         queryInput: {
           audioConfig: {
             audioEncoding: 'mp3',
-            // sampleRateHertz: sampleRateHertz,
+            sampleRateHertz: 48000,
             languageCode: languageCode,
           },
         },
@@ -77,13 +77,17 @@ function executeQuery(query, fn) {
 
 function handleResponse(responses) {
     const result = responses[0].queryResult;
-    const intent = result.intent.displayName;
+    var intent = null;
 
-    playAudio(responses);
+    if (result && result.intent) {
+        intent = result.intent.displayName;
+    }
 
     if (!intent) {
         return null;
     }
+
+    playAudio(responses);
 
     const params = {};
     const fields = result.parameters.fields;
