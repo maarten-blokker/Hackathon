@@ -60,7 +60,10 @@ function createBlobQuery(blob) {
             languageCode: languageCode,
           },
         },
-        inputAudio: blob
+        inputAudio: blob,
+        outputAudioConfig: {
+            audioEncoding: `OUTPUT_AUDIO_ENCODING_LINEAR_16`,
+        }
     }
 }
 
