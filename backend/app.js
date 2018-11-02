@@ -1,6 +1,7 @@
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const dialogFlow = require('./dialogflow/dialogflow-client');
 const products = require('./products');
 
 app.get('/', function(req, res){
@@ -8,7 +9,9 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  dialogFlow.executeTextQuery('hello', function(response) {
+      console.log('response: ' + JSON.stringify(response));
+  })
   socket.on('startRecording', function (data) {
     io.emit('newProducts', products)
   });

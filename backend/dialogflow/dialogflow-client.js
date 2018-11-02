@@ -53,13 +53,6 @@ function executeTextQuery(textQuery, fn) {
     sessionClient
         .detectIntent(createTextRequest(textQuery))
         .then(responses => {
-            console.log('Detected intent');
-            if (!result.intent) {
-                fn(null, 'no intent matched')
-            }
-
-            console.log(`Matched intent: ${result.intent.displayName}`);
-            
             const response = handleResponse(responses);
 
             fn(handleResponse(responses));
