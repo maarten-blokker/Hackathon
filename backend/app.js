@@ -14,8 +14,10 @@ io.on('connection', function(socket){
   });
 
   socket.on('blob', function (data) {
-    dialogFlow.executeSpeechQuery(dialogFlow.createBlobQuery(data), function(response) {
+    dialogFlow.executeQuery(dialogFlow.createBlobQuery(data), function(response) {
         io.emit('newProducts', products)
+
+        console.log('received response: ' + JSON.stringify(response));
     });
   })
 });
