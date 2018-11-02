@@ -5,6 +5,7 @@ const dialogflow = require('dialogflow').v2beta1;
 // Audio settings
 const FFplay = require("ffplay");
 const outputPath = './output.wav';
+const inputPath = './input.wav';
 
 // Dialogflow settings
 const projectId = 'acme-221110';
@@ -34,7 +35,7 @@ function playAudio(responses) {
     });
 }
 
-function createTextRequest(textQuery) {
+function createTextQuery(textQuery) {
     return {
         session: sessionPath,
         queryInput: {
@@ -49,9 +50,23 @@ function createTextRequest(textQuery) {
     };
 }
 
-function executeTextQuery(textQuery, fn) {
+function createBlobQuery(blob) {
+    return {
+        session: sessionPath,
+        queryInput: {
+          audioConfig: {
+            audioEncoding: 'mp3',
+            // sampleRateHertz: sampleRateHertz,
+            languageCode: languageCode,
+          },
+        },
+        inputAudio: blob
+    }
+}
+
+function executeQuery(query, fn) {
     sessionClient
-        .detectIntent(createTextRequest(textQuery))
+        .detectIntent(createTextRequest(query))
         .then(responses => {
             const response = handleResponse(responses);
 
@@ -85,5 +100,7 @@ function handleResponse(responses) {
 }
 
 module.exports = {
-    executeTextQuery
+    executeQuery,
+    createTextQuery,
+    createBlobQuery
 }

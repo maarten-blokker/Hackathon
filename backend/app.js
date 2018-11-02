@@ -16,12 +16,12 @@ io.on('connection', function(socket){
   });
 
   socket.on('blob', function (data) {
-    console.log(data)
+    dialogFlow.executeSpeechQuery(dialogFlow.createBlobQuery(data));
   })
 });
 
 function greeting(socket) {
-    dialogFlow.executeTextQuery('hello', function(response) {
+    dialogFlow.executeQuery(dialogFlow.createTextQuery('hello'), function(response) {
         setTimeout(function(){
             socket.emit('georgeTalking');
         }, 5000)
