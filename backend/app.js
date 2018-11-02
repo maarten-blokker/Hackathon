@@ -10,23 +10,22 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   socket.on('startRecording', function (data) {
-    
-    greeting(socket);
-
-    // io.emit('newProducts', products)
+    greeting();
   });
 
   socket.on('blob', function (data) {
-    dialogFlow.executeSpeechQuery(dialogFlow.createBlobQuery(data));
+    dialogFlow.executeSpeechQuery(dialogFlow.createBlobQuery(data), function(response) {
+        io.emit('newProducts', products)
+    });
   })
 });
 
-function greeting(socket) {
-    socket.emit('georgeTalking')
+function greeting() {
+    io.emit('georgeTalking')
 
     dialogFlow.executeQuery(dialogFlow.createTextQuery('hello'), function(response) {
         setTimeout(function(){
-            socket.emit('userTalking');
+            io.emit('userTalking');
         }, 3000)
     })
 }
