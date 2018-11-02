@@ -6,6 +6,8 @@
     "react": "^16.6.0",
     "react-animated-slider": "^1.1.4",
     "react-dom": "^16.6.0",
+    "react-loaders": "^3.0.1",
+    "react-record": "^1.0.5",
     "react-scripts": "2.1.1",
     "socket.io-client": "^2.1.1"
   },
