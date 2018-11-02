@@ -6,11 +6,11 @@ import data from './fakeProducts.json'
  class Carousel extends React.PureComponent {
    render() {
      return (
-       <div>
+       <div className="carousel">
          <Slider autoplay={ 3000 }>
            {data.products.map((product, index) => <div key={index}>
              <h2>{product.name}</h2>
-             <img src={ product.currentVariantProduct.images[0].url }></img>
+             <img className="carouselImage" src={ product.currentVariantProduct.images[0].url }></img>
            </div>)}
          </Slider>
        </div>
